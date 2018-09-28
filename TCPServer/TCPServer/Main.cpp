@@ -7,6 +7,7 @@
 #include <ws2tcpip.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <iostream>
 
 // Need to link with Ws2_32.lib
 #pragma comment (lib, "Ws2_32.lib")
@@ -17,6 +18,7 @@
 
 int __cdecl main(void)
 {
+	using namespace std;
 	WSADATA wsaData;
 	int iResult;
 
@@ -29,6 +31,7 @@ int __cdecl main(void)
 	int iSendResult;
 	char recvbuf[DEFAULT_BUFLEN];
 	int recvbuflen = DEFAULT_BUFLEN;
+	char exit;
 
 	// Initialize Winsock
 	iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
@@ -70,7 +73,7 @@ int __cdecl main(void)
 		return 1;
 	}
 
-	freeaddrinfo(result);
+	//freeaddrinfo(result);
 
 	iResult = listen(ListenSocket, SOMAXCONN);
 	if (iResult == SOCKET_ERROR) {
@@ -89,16 +92,13 @@ int __cdecl main(void)
 		return 1;
 	}
 
-	// No longer need server socket
-	closesocket(ListenSocket);
-
 	// Receive until the peer shuts down the connection
 	do {
 
 		iResult = recv(ClientSocket, recvbuf, recvbuflen, 0);
 		if (iResult > 0) {
+			printf("Message: %s\n",recvbuf);
 			printf("Bytes received: %d\n", iResult);
-
 			// Echo the buffer back to the sender
 			iSendResult = send(ClientSocket, recvbuf, iResult, 0);
 			if (iSendResult == SOCKET_ERROR) {

@@ -1,0 +1,8 @@
+﻿  Main.cpp
+d:\users\sage_king\source\repos\tcpserver\tcpserver\tcpserver\main.cpp(34): warning C4101: 'exit': unreferenced local variable
+  Generating code
+  0 of 4 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  TCPServer.vcxproj -> D:\Users\Sage_King\Source\Repos\TCPServer\TCPServer\x64\Release\TCPServer.exe
